@@ -22,10 +22,12 @@ public class SpongePlugin {
     @SpongeEventHandler
     public void onInit(PreInitializationEvent event) {
         // TODO -> start plugin: load config, assign variables
+
         config = new Config();
         configFile = new File("config");
 
         if(!configFile.exists()) {
+            // Warning: An actual Plugin should use log4j here.
             System.out.println("[SpongePlugin] Could not find config! Creating default config.");
             config.addDefault("messageInit", "Plugin enabled!");
             config.addDefault("messageStop", "Plugin disabled!");
@@ -33,6 +35,7 @@ public class SpongePlugin {
             try {
                 config.save(configFile);
             } catch(IOException e) {
+                // Warning: An actual Plugin should use log4j here.
                 System.out.println("[SpongePlugin] Could not save config!");
                 e.printStackTrace();
             }
@@ -42,12 +45,15 @@ public class SpongePlugin {
         messageInit = config.getString("messageInit");
         messageStop = config.getString("messageStop");
 
+        // Warning: An actual Plugin should use log4j here.
         System.out.println("[SpongePlugin] " + messageInit);
     }
 
     @SpongeEventHandler
     public void onStop(ServerStoppingEvent event) {
         // TODO -> stop plugin: save config (if changed), clean up
+
+        // Warning: An actual Plugin should use log4j here.
         System.out.println("[SpongePlugin " + messageStop);
     }
 }
